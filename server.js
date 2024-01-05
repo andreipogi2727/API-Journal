@@ -1,6 +1,10 @@
 const express = require('express')
-const { default: mongoose } = require('mongoose')
+const mongoose = require('mongoose')
 const app = express()
+
+
+
+app.use(express.json())
 
 mongoose
 .connect('mongodb+srv://admin:admin123@devandreiapi.ohinqtp.mongodb.net/Node-API?retryWrites=true&w=majority')
