@@ -2,12 +2,17 @@
 <html lang="en">
 
 <head>
+    
     <link rel="stylesheet" type="text/css" href="myStyle.css" />
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Product Listing</title>
     <style>
         /* Add your styles here */
+        textarea
+        {
+            border: #1a1b1b;
+        }
         body
         {
             background-color: #f4f4f4;
@@ -30,7 +35,7 @@
   background-color: #f4f4f4;
 }
 
-.topnav a {
+.topnav button {
   float: left;
   background-color: #f4f4f4;
   color: #1a1b1b;
@@ -38,9 +43,10 @@
   padding: 14px 16px;
   text-decoration: none;
   font-size: 17px;
+  border: none;
 }
 
-.topnav a:hover {
+.topnav button:hover {
   background-color: #ddd;
   color: black;
 }
@@ -51,6 +57,10 @@
 }
     </style>
     <script>
+        var page = "firstPage";
+        
+        
+        
         function saveJournal()
         {
             alert('save clicked')
@@ -82,27 +92,58 @@
                 });
             }
 
-            function loadPage(pageToLoad)
+            function whichPage()
             {
-                if (pageToLoad === 'create')
+                $("#createButton").click(function()
+        {
+            page = "firstPage";
+        });
+
+        $("#journalButton").click(function()
+        {
+            page = "secondPage";
+        });
+               
+                var shouldSumbit = true;
+
+                if(page == 'firstPage')
                 {
+                    alert("firstPage")
+                    shouldSumbit = false;
 
                 }
-
-                else if (pageToLoad === 'journal')
+                else if (page == 'secondPage')
                 {
+                    alert("secondPage")
+                    shouldSumbit = true;
+                }
 
+                
+                return shouldSumbit;
+            }
+
+            function setPage(page)
+            {
+                if (page == "first")
+                {
+                    return
+                }
+                else if (page == "second")
+                {
+                    document.forms["firstPage"].submit();
                 }
             }
+
+            
         
     </script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 </head>
-
+<form name = "firstPage" method="GET" action="secondPage.html" onsubmit="return false;">
 <body>
     <div class="topnav">
-        <a href="" onclick="loadPage('create')">Create</a>
-        <a  href = "" onclick ="loadPage('journal')">Journals</a>
+        <button id = "createButton" onclick = "setPage('first')" type = "submit" >Create</button>
+        <button  id = "journalButton" onclick = "setPage('second')" type = "submit">Journals</button>
         
       </div>
       <div id = "createPage">
@@ -137,7 +178,7 @@
 </div>
 
 
-   
+</form>
 </body>
 
 </html>
