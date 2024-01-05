@@ -16,9 +16,9 @@ const getJournals = async(req,res) =>
 
 const getJournalByRate = async(req,res) =>
 {
-    const {reqJournals} = req.params
+    const {rate} = req.params
     try {
-        const journal = await Journal.find({rate: reqJournals});
+        const journal = await Journal.find({rate: rate});
         res.status(200).json(journal);
     } catch (error) {
         res.status(500).json({message:error.message})
