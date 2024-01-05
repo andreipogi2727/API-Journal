@@ -6,6 +6,12 @@ const app = express()
 
 app.use(express.json())
 
+app.post('/journal', (req, res) =>
+{
+    res.status(200);
+    console.log(req.body)
+})
+
 mongoose
 .connect('mongodb+srv://admin:admin123@devandreiapi.ohinqtp.mongodb.net/Node-API?retryWrites=true&w=majority')
 .then(() =>
