@@ -1,14 +1,24 @@
 const express = require('express')
 const mongoose = require('mongoose')
+const Journal = require('./models/journalModel')
 const app = express()
 
 
 
 app.use(express.json())
 
-app.post('/journal', (req, res) =>
+app.post('/journal', async(req, res) =>
 {
-    res.status(200);
+    
+    try {
+        const journal = await Journal.create(req.body)
+        res.status(200).json(journal)
+    } catch (error) {
+        
+        console.log(error.message);
+        res.status(500).json({message: error.message})
+    }
+   
     console.log(req.body)
 })
 

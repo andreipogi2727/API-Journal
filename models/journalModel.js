@@ -5,7 +5,7 @@ const journalSchema = mongoose.Schema
     {
         rate:
         {
-            type: int,
+            type: Number,
             required: [true, "Rate how you feel"]
         },
 
@@ -35,4 +35,4 @@ const journalSchema = mongoose.Schema
 
 const Journal = mongoose.model('Journal', journalSchema);
 
-module.exports = Product;
+module.exports = Journal;
