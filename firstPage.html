@@ -25,13 +25,46 @@
             
         }
     </style>
+    <script>
+        function saveJournal()
+        {
+            alert('save clicked')
+            // Prepare JSON data for the new product
+            var rateValue = $('#rate').val();
+            var summaryValue = $('#summary').val();
+            var goalsValue = $('#goals').val();
+            var imageValue = $('#image').val();
+
+            const newProduct = {
+                    rate: rateValue,
+                    summary: summaryValue ,
+                    goals: goalsValue,
+                    image: imageValue
+                };
+
+                // Send a POST request with JSON data to create a new product
+                $.ajax({
+                    url: 'http://localhost:3000/journals',
+                    method: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify(newProduct),
+                    success: function () {
+                       alert('Succesfully saved')
+                    },
+                    error: function (error) {
+                        console.error('Error creating journal:', error);
+                    }
+                });
+            }
+        
+    </script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 </head>
 
 <body>
     <div id="journalList" class = "container">
     <p>Rate your day from 1 to 10</p>
-    <select>
+    <select id = "rate">
         <option value="1">1</option>
         <option value="2">2</option>
         <option value="3">3</option>
@@ -47,15 +80,15 @@
     </select>
     
     <p>Summary of your day</p>
-    <textarea></textarea>
+    <textarea id = "summary"></textarea>
     <br>
     <p>Goals</p>
-    <textarea ></textarea>
+    <textarea id = "goals"></textarea>
     <p>Image that describes your day</p>
-    <input placeholder="Paste link here"></input>
+    <input id = "image" placeholder="Paste link here"></input>
     <br>
     <br>
-    <button> Save </button>
+    <button onclick="saveJournal()"> Save </button>
     </div>
 
    
