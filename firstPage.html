@@ -6,7 +6,7 @@
     <link rel="stylesheet" type="text/css" href="myStyle.css" />
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Product Listing</title>
+    <title>Create Journal</title>
     <style>
         /* Add your styles here */
         textarea
@@ -92,36 +92,7 @@
                 });
             }
 
-            function whichPage()
-            {
-                $("#createButton").click(function()
-        {
-            page = "firstPage";
-        });
-
-        $("#journalButton").click(function()
-        {
-            page = "secondPage";
-        });
-               
-                var shouldSumbit = true;
-
-                if(page == 'firstPage')
-                {
-                    alert("firstPage")
-                    shouldSumbit = false;
-
-                }
-                else if (page == 'secondPage')
-                {
-                    alert("secondPage")
-                    shouldSumbit = true;
-                }
-
-                
-                return shouldSumbit;
-            }
-
+           
             function setPage(page)
             {
                 if (page == "first")
