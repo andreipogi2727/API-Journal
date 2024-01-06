@@ -63,14 +63,14 @@
         
         function saveJournal()
         {
-            alert('save clicked')
+            
             // Prepare JSON data for the new product
             var rateValue = $('#rate').val();
             var summaryValue = $('#summary').val();
             var goalsValue = $('#goals').val();
             var imageValue = $('#image').val();
 
-            const newProduct = {
+            const newJournal = {
                     rate: rateValue,
                     summary: summaryValue ,
                     goals: goalsValue,
@@ -82,11 +82,12 @@
                     url: 'http://localhost:3000/journals',
                     method: 'POST',
                     contentType: 'application/json',
-                    data: JSON.stringify(newProduct),
+                    data: JSON.stringify(newJournal),
                     success: function () {
                        alert('Succesfully saved')
                     },
                     error: function (error) {
+                        alert('Finish the journal')
                         console.error('Error creating journal:', error);
                     }
                 });

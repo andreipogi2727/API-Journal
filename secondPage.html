@@ -12,12 +12,11 @@
 
         }
 
-        body {
+        body 
+        {
             font-family: Arial, sans-serif;
             background-color: #f4f4f4;
             align-items: center;
-            
-          
         }
        
         .list
@@ -49,49 +48,71 @@
             position: relative;
             background-color: rgb(135, 135, 134);
         }
-        .topnav {
-  overflow: hidden;
-  background-color: #f4f4f4;
-}
+        .topnav
+        {
+            overflow: hidden;
+            background-color: #f4f4f4;
+        }
 
-.topnav button {
-  float: left;
-  background-color: #f4f4f4;
-  color: #1a1b1b;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-  font-size: 17px;
-  border: none;
-}
+        .topnav button
+        {
+            float: left;
+            background-color: #f4f4f4;
+            color: #1a1b1b;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            font-size: 17px;
+            border: none;
+        }
 
-.topnav button:hover {
-  background-color: #ddd;
-  color: black;
-}
+        .topnav button:hover
+        {
+        background-color: #ddd;
+        color: black;
+        }
 
 
     </style>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-     <script>
+</head>
+
+<body>
+    <form name = "secondPage" method="GET" action="firstPage.html" onsubmit="return false;">
+    <div class="topnav">
+
+        <button id = "createButton" onclick = "setPage('first')" type = "submit" >Create</button>
+        <button  id = "journalButton" onclick = "setPage('second')" type = "submit">Journals</button>
+        
+    </div>
+    <br>
+
+    <div class ="list">
+        <div id="journalList" ></div>
+    </div>
+    
+    
+    </form>
+    <script>
         $(document).ready(function () {
-            // Fetch product data from your API using jQuery
+            
             $.ajax({
-                url: 'http://localhost:3000/journals', // Adjust the URL based on your server
+                url: 'http://localhost:3000/journals', 
                 method: 'GET',
-                dataType: 'json',
-                success: function (products) {
-                    const productListDiv = $('#productList');
+                dataType: 'json', 
+                success: function (journals) {
+                    const productListDiv = $('#journalList');
 
                     // Display products on the page
-                    $.each(products, function (index, product) {
+                    $.each(journals, function (index, value) {
                         const productDiv = $('<div>');
                         productDiv.html(`
-                            <h2 class = "date"> ${new Date(product.createdAt).toLocaleString()}</h2>
-                            <p> Day Rating: ${product.rate}</p>
-                            <p>Summary: ${product.summary}</p>
-                            <p>Goals: ${product.goals}</p>
-                            <img src="${product.image}" alt="Your image of the day" width="200" height = "200">
+                            <h2 class = "date"> ${new Date(value.createdAt).toLocaleString()}</h2>
+                            <img src="${value.image}" alt="Your image of the day" width="200" height = "200">
+                            <p> Day Rating: ${value.rate}</p>
+                            <p>Summary: ${value.summary}</p>
+                            <p>Goals: ${value.goals}</p>
+                            
                             
                             
                         `);
@@ -104,12 +125,6 @@
             });
              // Initial fetch
              fetchProducts();
-
-            // Toggle order on button click
-            $('#toggleOrder').click(function () {
-                sortOrder = sortOrder === 'asc' ? 'desc' : 'asc';
-                fetchProducts();
-            });
         });
 
         function setPage(page)
@@ -117,54 +132,16 @@
                 if (page == "first")
                 {
                     document.forms["secondPage"].submit();
+                    
                 }
                 else if (page == "second")
                 {
-                    return;
+                    return
                 }
             }
 
-        
     </script>
     
-
-</head>
-
-<body>
-    <form name = "secondPage" method="GET" action="firstPage.html" onsubmit="return false;">
-        <body>
-            <div class="topnav">
-                <button id = "createButton" onclick = "setPage('first')" type = "submit" >Create</button>
-                <button  id = "journalButton" onclick = "setPage('second')" type = "submit">Journals</button>
-                
-              </div>
-      <br>
-
-    <select id=" filter">
-        <option>Filter</option>
-        <option id = 1> Day Rating 1/10</option>
-        <option id = 2> Day Rating 2/10</option>
-        <option id = 3> Day Rating 3/10</option>
-        <option id = 4> Day Rating 4/10</option>
-        <option id = 5> Day Rating 5/10</option>
-        <option id = 6> Day Rating 6/10</option>
-        <option id = 7> Day Rating 7/10</option>
-        <option id = 8> Day Rating 8/10</option>
-        <option id = 9> Day Rating 9/10</option>
-        <option id = 10> Day Rating 10/10</option>
-
-    </select>
-
-    <div class ="list">
-        <div id="productList" ></div>
-    </div>
-    
-    <div id ="chart" class ="chart">
-        <p> 1 2 3 4 5 6 7 8 9 10</p>
-    </div>
-
-   
-    </form>
 </body>
 
 </html>
