@@ -17,6 +17,7 @@
             font-family: Arial, sans-serif;
             background-color: #f4f4f4;
             align-items: center;
+            justify-content: center;
         }
        
         .list
@@ -71,6 +72,20 @@
         background-color: #ddd;
         color: black;
         }
+        .entry{
+          
+           
+        }
+        .img{
+            border-radius: 50%;
+            box-shadow:  0 0 25px gray;
+            object-fit: cover;
+        }
+       .container{
+      text-align: center;
+      margin-left: 200px;
+        width: 100%;
+       }
 
 
     </style>
@@ -105,15 +120,17 @@
 
                     // Display products on the page
                     $.each(journals, function (index, value) {
-                        const productDiv = $('<div>');
+                        const productDiv = $('<div class = "container">');
                         productDiv.html(`
+                      
+                            <div class = "entry">
                             <h2 class = "date"> ${new Date(value.createdAt).toLocaleString()}</h2>
-                            <img src="${value.image}" alt="Your image of the day" width="200" height = "200">
+                            <img class="img" src="${value.image}" width="200" height = "200">
                             <p> Day Rating: ${value.rate}</p>
                             <p>Summary: ${value.summary}</p>
                             <p>Goals: ${value.goals}</p>
-                            
-                            
+                            </div>
+                       
                             
                         `);
                         productListDiv.append(productDiv);

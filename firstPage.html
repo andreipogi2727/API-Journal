@@ -2,68 +2,102 @@
 <html lang="en">
 
 <head>
-    
     <link rel="stylesheet" type="text/css" href="myStyle.css" />
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create Journal</title>
     <style>
-        /* Add your styles here */
-        textarea
-        {
+        textarea {
             border: #1a1b1b;
         }
-        body
-        {
+        body {
             background-color: #f4f4f4;
-
         }
-        .container
-        {
+        .container {
             justify-content: center;
             text-align: center;
         }
-        textarea
-        {
-            width: 700px; 
+        textarea {
+            width: 700px;
             height: 300px;
             font-family: Arial, Helvetica, sans-serif;
-
+            border-radius: .7rem;
+            box-shadow: 0 0 20px black;
+        }
+        .summary-text, .goals-text {
+            border: 4px solid gray;
+            padding: 12px;
+            background-color: gray;
+        }
+        p {
+            font-size: 2rem;
+            margin: .3rem;
+        }
+        option {
+            text-align: center;
+            font-weight: bold;
+            color: white;
+        }
+        select {
+            width: 100px;
+            height: 2rem;
+            font-size: 1rem;
+            align-items: center;
+            border: none;
+            border-radius: .7rem;
+            background-color: #464847;
+            color: white;
+        }
+        button {
+            border: none;
+            color: white;
+            background-color: gray;
+            border-radius: .7rem;
+            width: 100px;
+            height: 50px;
+            font-size: 1rem;
         }
         .topnav {
-  overflow: hidden;
-  background-color: #f4f4f4;
-}
-
-.topnav button {
-  float: left;
-  background-color: #f4f4f4;
-  color: #1a1b1b;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-  font-size: 17px;
-  border: none;
-}
-
-.topnav button:hover {
-  background-color: #ddd;
-  color: black;
-}
-
-.topnav a.active {
-  background-color: #04AA6D;
-  color: white;
-}
+            overflow: hidden;
+            background-color: #f4f4f4;
+        }
+        .topnav button {
+            float: left;
+            background-color: #f4f4f4;
+            color: #1a1b1b;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            font-size: 17px;
+            border: none;
+        }
+        .topnav button:hover {
+            background-color: #ddd;
+            color: black;
+        }
+        .topnav a.active {
+            background-color: #04AA6D;
+            color: white;
+        }
+        #dropArea {
+            width: 300px;
+            height: 200px;
+            border: 2px dashed #ccc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 20px auto;
+        }
+        #imageDisplay img {
+            max-width: 100%;
+            height: auto;
+            display: none;
+        }
     </style>
     <script>
         var page = "firstPage";
-        
-        
-        
-        function saveJournal()
-        {
-            
+
+        function saveJournal() {
             // Prepare JSON data for the new product
             var rateValue = $('#rate').val();
             var summaryValue = $('#summary').val();
@@ -71,86 +105,102 @@
             var imageValue = $('#image').val();
 
             const newJournal = {
-                    rate: rateValue,
-                    summary: summaryValue ,
-                    goals: goalsValue,
-                    image: imageValue
-                };
+                rate: rateValue,
+                summary: summaryValue,
+                goals: goalsValue,
+                image: imageValue
+            };
 
-                // Send a POST request with JSON data to create a new product
-                $.ajax({
-                    url: 'http://localhost:3000/journals',
-                    method: 'POST',
-                    contentType: 'application/json',
-                    data: JSON.stringify(newJournal),
-                    success: function () {
-                       alert('Succesfully saved')
-                    },
-                    error: function (error) {
-                        alert('Finish the journal')
-                        console.error('Error creating journal:', error);
-                    }
-                });
-            }
-
-           
-            function setPage(page)
-            {
-                if (page == "first")
-                {
-                    return
+            // Send a POST request with JSON data to create a new product
+            $.ajax({
+                url: 'http://localhost:3000/journals',
+                method: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify(newJournal),
+                success: function () {
+                    alert('Successfully saved')
+                },
+                error: function (error) {
+                    alert('Finish the journal')
+                    console.error('Error creating journal:', error);
                 }
-                else if (page == "second")
-                {
-                    document.forms["firstPage"].submit();
-                }
-            }
+            });
+        }
 
-            
-        
+        function setPage(page) {
+            if (page == "first") {
+                return
+            } else if (page == "second") {
+                document.forms["firstPage"].submit();
+            }
+        }
+
+        function handleDrop(event) {
+            event.preventDefault();
+            var file = event.dataTransfer.files[0];
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                var imageURL = e.target.result;
+                document.getElementById('image').value = imageURL;
+                var img = document.getElementById('selectedImage');
+                img.src = imageURL;
+                img.style.display = 'block';
+            };
+
+            reader.readAsDataURL(file);
+        }
+
+        function handleDragOver(event) {
+            event.preventDefault();
+        }
     </script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 </head>
-<form name = "firstPage" method="GET" action="secondPage.html" onsubmit="return false;">
 <body>
     <div class="topnav">
-        <button id = "createButton" onclick = "setPage('first')" type = "submit" >Create</button>
-        <button  id = "journalButton" onclick = "setPage('second')" type = "submit">Journals</button>
-        
-      </div>
-      <div id = "createPage">
-    <div id="journalList" class = "container">
-    <p>Rate your day from 1 to 10</p>
-    <select id = "rate">
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-        <option value="5">5</option>
-        <option value="6">6</option>
-        <option value="7">7</option>
-        <option value="8">8</option>
-        <option value="9">9</option>
-        <option value="10">10</option>
-
-        
-    </select>
-    
-    <p>Summary of your day</p>
-    <textarea id = "summary"></textarea>
-    <br>
-    <p>Goals</p>
-    <textarea id = "goals"></textarea>
-    <p>Image that describes your day</p>
-    <input id = "image" placeholder="Paste link here"></input>
-    <br>
-    <br>
-    <button onclick="saveJournal()"> Save </button>
+        <button id="createButton" onclick="setPage('first')" type="submit">Create</button>
+        <button id="journalButton" onclick="setPage('second')" type="submit">Journals</button>
     </div>
-</div>
+    <div id="createPage">
+        <div id="journalList" class="container">
+            <p>Rate your day from 1 to 10</p>
+            <select id="rate">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+            </select>
 
+            <p>Summary of your day</p>
+            <div class="summary-text">
+                <textarea id="summary"></textarea>
+            </div>
 
-</form>
+            <br>
+            <p>Goals</p>
+            <div class="goals-text">
+                <textarea id="goals"></textarea>
+            </div>
+
+            <p>Image that describes your day</p>
+            <div id="dropArea" ondrop="handleDrop(event)" ondragover="handleDragOver(event)">
+                Drop an image here
+            </div>
+            <input id="image" placeholder="Paste link here"></input>
+            <div id="imageDisplay">
+                <img id="selectedImage" src="" alt="">
+            </div>
+
+            <br><br>
+            <button onclick="saveJournal()"> Save </button>
+        </div>
+    </div>
 </body>
-
 </html>
