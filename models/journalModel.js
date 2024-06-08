@@ -6,18 +6,20 @@ const journalSchema = mongoose.Schema
         rate:
         {
             type: Number,
+            required: true,
             
         },
 
         summary:
         {
             type: String,
-            
+            required: true,
         },
 
         goals:
         {
             type: String,
+            required: true,
             
         },
 

@@ -125,11 +125,11 @@ function saveJournal() {
         contentType: 'application/json',
         data: JSON.stringify(newJournal),
         success: function () {
-            alert('Successfully saved');
+           
         },
         error: function (error) {
-            alert('Finish the journal');
-            console.error('Error creating journal:', error);
+          
+            alert('Error creating journal:', error);
         }
     });
 }
@@ -151,8 +151,10 @@ function handleDrop(event) {
     var reader = new FileReader();
 
     reader.onload = function (event) {
+        console.log("Image source", event.target.result)
         $('#selectedImage').attr('src', event.target.result);
         $('#imageDisplay img').css('display', 'block');
+        $('#image').attr('value', event.target.result)
     };
 
     reader.readAsDataURL(imageFile);

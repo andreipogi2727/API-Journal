@@ -41,6 +41,9 @@ button {
     font-size: 1rem;
     cursor: pointer;
 }
+button:hover{
+    background-color: #ccc;
+}
 .topnav {
     overflow: hidden;
     background-color: #f4f4f4;

@@ -17,8 +17,7 @@ const PORT = process.env.PORT || 3000; // Use port 3000, or use a different port
 
 
 mongoose.connect(process.env.MONGODB_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
+   
 }).then(() => {
     console.log('Successfully connected to MongoDB');
     app.listen(PORT, () => {
