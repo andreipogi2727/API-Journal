@@ -6,19 +6,19 @@ const journalSchema = mongoose.Schema
         rate:
         {
             type: Number,
-            required: [true, "Rate how you feel"]
+            
         },
 
         summary:
         {
             type: String,
-            required: [true, "Please enter a summary of your day"]
+            
         },
 
         goals:
         {
             type: String,
-            required : [true, "Please enter a goal"]
+            
         },
 
         image:

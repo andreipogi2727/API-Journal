@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="secondPage.css"> 
+    <title>Journal API</title>
+</head>
+<body>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="script.js"></script>
+    <div class="topnav">
+        <button id="createButton" onclick="setPageFirst()">Create</button>
+        <button id="journalButton" onclick="setPageSecond()">Journals</button>
+    </div>
+    <br>
+    <div class="sorting-buttons">
+        <button onclick="sortJournals('createdAt', 'asc')">Sort by Date Asc</button>
+        <button onclick="sortJournals('createdAt', 'desc')">Sort by Date Desc</button>
+        <button onclick="sortJournals('rate', 'asc')">Sort by Rate Asc</button>
+        <button onclick="sortJournals('rate', 'desc')">Sort by Rate Desc</button>
+    </div>
+    <div class="list">
+        <div id="journalList"></div>
+    </div>
+
+</body>
+</html>

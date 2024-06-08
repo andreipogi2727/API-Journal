@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="firstPage.css"> 
+    <title>Journal API</title>
+</head>
+<body>
+    <div class="topnav">
+        <button id="createButton" onclick="setPageFirst()">Create</button>
+        <button id="journalButton" onclick="setPageSecond()">Journals</button>
+    </div>
+    <div id="createPage" class="createPage">
+        <div id="journalList" class="container">
+            <p>Rate your day from 1 to 10</p>
+            <select id="rate">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+            </select>
+
+            <p>Summary of your day</p>
+            <div class="summary-text">
+                <textarea id="summary"></textarea>
+            </div>
+
+            <br>
+            <p>Goals</p>
+            <div class="goals-text">
+                <textarea id="goals"></textarea>
+            </div>
+
+            <p>Image that describes your day</p>
+            <div id="dropArea" ondrop="handleDrop(event)" ondragover="handleDragOver(event)">
+                Drop an image here
+            </div>
+            <input id="image" placeholder="Paste link here"></input>
+            <div id="imageDisplay">
+                <img id="selectedImage" src="" alt="">
+            </div>
+            <br><br>
+            <button onclick="saveJournal()"> Save </button>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
